@@ -29,6 +29,6 @@ app.use("/complaint", routecomplaint);
 app.get("/", function (req, res) {
   res.end("hello world");
 });
-app.listen(port, "10.210.32.34", function () {
-  console.log("server is " + port);
-});
+// app.listen(port, "10.210.32.34", function () {
+//   console.log("server is " + port);
+// });
