@@ -1,9 +1,0 @@
-[[redirects]]
-from = "/*"
-to = "/index.js"
-status = 200
-
-[[redirects]]
-from = "/user"
-to = "/routeuser.js"
-status = 200
