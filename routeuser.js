@@ -66,9 +66,13 @@ router.post("/verify", (req, res) => {
 });
 
 router.get("/all", (req, res) => {
-  User.find().then((document) => {
-    res.json(document);
-  });
+  User.find()
+    .then((document) => {
+      res.json(document);
+    })
+    .catch(() => {
+      res.json(document)
+    });
 });
 
 // router.get("/verify", (req, res) => {
