@@ -29,6 +29,6 @@ app.use("/complaint", routecomplaint);
 app.get("/", function (req, res) {
   res.end("hello world");
 });
-app.listen(port, function () {
+app.listen(process.env.PORT || port, function () {
   console.log("server is " + port);
 });
