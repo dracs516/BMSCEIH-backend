@@ -8,8 +8,9 @@ router.post("/register", (req, res) => {
     last_name: req.body.last_name,
     username: req.body.username,
     email: req.body.email,
-    phone_num: req.body.phone_num,
     room_no: req.body.room_no,
+    hostel: req.body.hostel,
+    phone_num: req.body.phone_num,
     password: req.body.password,
     timestamps: req.body.timestamps,
   });
@@ -71,7 +72,7 @@ router.get("/all", (req, res) => {
       res.json(document);
     })
     .catch(() => {
-      res.json(document)
+      res.json(document);
     });
 });
 
