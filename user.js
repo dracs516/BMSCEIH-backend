@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+const moment = require("moment-timezone");
+
+const dateIndia = moment.tz(Date.now(), "Asia/Kolkata");
 
 const userSchema = new schema({
   // name: { type: String, required: true },
@@ -11,6 +14,7 @@ const userSchema = new schema({
   phone_num: { type: String, required: true, unique: true },
   room_no: { type: String, required: true },
   password: { type: String, required: true },
+  timestamps: { type: Date, required: true, default: dateIndia },
 });
 
 const User = (module.exports = mongoose.model("User", userSchema));

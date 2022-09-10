@@ -7,6 +7,7 @@ router.post("/register/complaint", (req, res) => {
     username: req.body.username,
     title: req.body.title,
     description: req.body.description,
+    timestamps: req.body.timestamps,
   });
 
   newComplaint
@@ -24,7 +25,7 @@ router.post("/register/complaint", (req, res) => {
 });
 
 router.post("/getcomplaint", (req, res) => {
-  Complaint.find({username:req.body.username}).then((document) => {
+  Complaint.find({ username: req.body.username }).then((document) => {
     res.json({
       status: 200,
       message: "User data fetched Successfully",

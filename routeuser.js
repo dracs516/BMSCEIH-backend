@@ -11,6 +11,7 @@ router.post("/register", (req, res) => {
     phone_num: req.body.phone_num,
     room_no: req.body.room_no,
     password: req.body.password,
+    timestamps: req.body.timestamps,
   });
 
   newUser
@@ -27,47 +28,67 @@ router.post("/register", (req, res) => {
     });
 });
 
-router.get("/getuser", (req, res) => {
-  User.find({ username: req.body.username }).then((document) => {
-    res.json({
-      status: 200,
-      message: "User data fetched Successfully",
-      document: document,
-    });
-  });
-});
+// router.get("/getuser", (req, res) => {
+//   User.find({ username: req.body.username }).then((document) => {
+//     res.json({
+//       status: 200,
+//       message: "User data fetched Successfully",
+//       document: document,
+//     });
+//   });
+// });
 
 router.post("/verify", (req, res) => {
-  const verifyUser = new User({
-    username: req.body.username,
-    password: req.body.password,
-  });
-  User.find().then((document) => {
-    res.json({
-      status: 200,
-      message: "User data fetched Successfully",
-      // data: document.some(
-      //   (person) =>
-      //     person.username === verifyUser.username &&
-      //     person.password === verifyUser.password
-      // ),
-      document: document,
+  // const verifyUser = new User({
+  //   username: req.body.username,
+  //   password: req.body.password,
+  // });
+  User.find({ username: req.body.username, password: req.body.password })
+    .then((document) => {
+      if (document[0].username != null) {
+        res.json({
+          status: 200,
+          message: "User data fetched Successfully",
+          // data: document.some(
+          //   (person) =>
+          //     person.username === verifyUser.username &&
+          //     person.password === verifyUser.password
+          // ),
+          document: document,
+        });
+      } else {
+        res.json({ status: 503 });
+      }
+    })
+    .catch(() => {
+      res.json({ status: 503 });
     });
+});
+
+router.get("/all", (req, res) => {
+  User.find().then((document) => {
+    res.json(document);
   });
 });
 
-router.get("/verify", (req, res) => {
-  User.find({ username: req.body.username, password: req.body.password }).then(
-    (document) => {
-      console.log(document);
-      res.json({
-        status: 200,
-        message: "Verified",
-        data: document,
-      });
-    }
-  );
-});
+// router.get("/verify", (req, res) => {
+//   User.find({ username: req.body.username, password: req.body.password }).then(
+//     (document) => {
+//       if (document) {
+//         console.log(document);
+//         res.json({
+//           status: 200,
+//           message: "Verified",
+//           data: document,
+//         });
+//       } else {
+//         res.json({
+//           status: 503,
+//         });
+//       }
+//     }
+//   );
+// });
 
 router.put("/update/:id", (req, res, next) => {
   const newuser = { _id: req.params.id };

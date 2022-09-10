@@ -7,6 +7,7 @@ const complaintSchema = new schema({
   username: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
+  timestamps: { type: Date, required: true, default: Date.now },
 });
 
 const Complaint = (module.exports = mongoose.model(
